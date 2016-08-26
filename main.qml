@@ -6,8 +6,8 @@ import QtQuick.Controls.Styles 1.2
 ApplicationWindow {
     visible: true
     property int  margin: 10
-    width: 400
-    height: 400
+    width: 530
+    height: 500
 
     title: qsTr("Model View")
 
@@ -17,12 +17,12 @@ ApplicationWindow {
         anchors.margins: margin
 
         Rectangle  {
-            color: "yellow"
+            color: "lightyellow"
             //anchors.fill: parent
 
             anchors.left: parent.left
             anchors.right: parent.right
-            border.width: 2
+            border.width: 1
             border.color: "red"
             width: parent.width
             height: listview.implicitHeight + 10
@@ -32,43 +32,59 @@ ApplicationWindow {
                 id: listview
                 spacing: 4
                 anchors.fill: parent
+                height: header.height + 5
                 anchors.margins: 5
                 implicitHeight: 250
 
-                header: Component {
-                    id: listviewheader
-
-                    Row {
-                        width: 30
-                        spacing: 4
-                        Text { text: "Name";}
-
-                        Text { text: "Sex";}
-
-                        Text { text: "Age"; }
-
-                        Text { text: "Tel"; }
-
-                        Text { text: "Addr"; }
-                    }
-                }
-
-                model: MyModel
+                model: mymodel
 
                 delegate: Component {
-                    Row{
-                        width: 30
-                        spacing: 4
-                        Label {text: name;}
-                        Label {text: sex;}
-                        Label {text: age;}
-                        Label {text: tel;}
-                        Label {text: addr;}
+//                    Row{
+//                        spacing: 4
+//                        Label {text: name; color: "blue"}
+//                        Label {text: sex;}
+//                        Label {text: age;}
+//                        Label {text: tel;}
+//                        Label {text: addr;}
+
+
+//                        Button {
+
+//                            id: delbtn
+//                            text: "Del"
+//                            Layout.fillWidth: true
+//                            style: ButtonStyle {
+//                                background: Rectangle {
+//                                    color: "lightblue"
+//                                    radius: 4
+//                                    border.width: delbtn.pressed? 1:0
+//                                    border.color: "red"
+//                                }
+//                            }
+
+//                            onClicked:  {
+//                                //listview.model.
+
+//                            }
+//                        }
+//                    }
+
+                    Rectangle {
+                        height: 30
+                        Label {text: name; x: 0; width: 80; height: 30}
+                        Label {text: sex; x: 90; width: 50; height: 30}
+                        Label {text: age; x: 180; width: 20; height: 30}
+                        Label {text: tel; x: 270; width: 80; height: 30}
+                        Label {text: addr; x: 360; width: 80; height: 30}
+
 
                         Button {
 
                             id: delbtn
                             text: "Del"
+                            x: 450
+                            width: 40
+                            height: 20
                             style: ButtonStyle {
                                 background: Rectangle {
                                     color: "lightblue"
@@ -79,6 +95,7 @@ ApplicationWindow {
                             }
 
                             onClicked:  {
+                                //listview.model.
 
                             }
                         }

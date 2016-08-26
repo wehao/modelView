@@ -47,4 +47,6 @@ private:
     QString m_tel;
     QString m_addr;
 };
+
+
 #endif // PERSON_H
