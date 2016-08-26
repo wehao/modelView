@@ -2,6 +2,7 @@ import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.2
+import com.listmodel 1.0
 
 ApplicationWindow {
     visible: true
