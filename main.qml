@@ -17,97 +17,87 @@ ApplicationWindow {
         anchors.margins: margin
 
         Rectangle  {
-            color: "lightyellow"
-            //anchors.fill: parent
 
             anchors.left: parent.left
             anchors.right: parent.right
-            border.width: 1
-            border.color: "red"
             width: parent.width
-            height: listview.implicitHeight + 10
             Layout.fillHeight: true
 
-            ListView {
-                id: listview
-                spacing: 4
-                anchors.fill: parent
-                height: header.height + 5
-                anchors.margins: 5
-                implicitHeight: 250
+            Rectangle {
+                id: header
+                height: 50
+                width: parent.width
+                color: "lightblue"
 
-                model: mymodel
+                Label {text: "Name";  x: 3; width: 80; height: 30; anchors.verticalCenter: parent.verticalCenter}
+                Label {text: "Sex"; x: 93; width: 50; height: 30; anchors.verticalCenter: parent.verticalCenter}
+                Label {text: "Age"; x: 183; width: 20; height: 30; anchors.verticalCenter: parent.verticalCenter}
+                Label {text: "Tel"; x: 273; width: 80; height: 30; anchors.verticalCenter: parent.verticalCenter}
+                Label {text: "Addr"; x: 363; width: 80; height: 30; anchors.verticalCenter: parent.verticalCenter}
+            }
 
-                delegate: Component {
-//                    Row{
-//                        spacing: 4
-//                        Label {text: name; color: "blue"}
-//                        Label {text: sex;}
-//                        Label {text: age;}
-//                        Label {text: tel;}
-//                        Label {text: addr;}
+            Rectangle {
+                id: listRec
+                color: "lightyellow"
+                y: header.height
+                width: parent.width
+                height: parent.height - header.height
+                border.width: 1
+                border.color: "red"
+                //anchors.margins: margin
 
+                ListView {
+                    id: listview
+                    spacing: 4
+                    anchors.fill: parent
+                    anchors.margins: 5
+                    //implicitHeight: 200
 
-//                        Button {
+                    snapMode:  ListView.SnapToItem
+                    model: mymodel
 
-//                            id: delbtn
-//                            text: "Del"
-//                            Layout.fillWidth: true
-//                            style: ButtonStyle {
-//                                background: Rectangle {
-//                                    color: "lightblue"
-//                                    radius: 4
-//                                    border.width: delbtn.pressed? 1:0
-//                                    border.color: "red"
-//                                }
-//                            }
+                    delegate: Component {
 
-//                            onClicked:  {
-//                                //listview.model.
+                        Rectangle {
+                            height: 31
+                            Label {text: name; x: 0; width: 80; height: 31}
+                            Label {text: sex; x: 90; width: 50; height: 31}
+                            Label {text: age; x: 180; width: 20; height: 31}
+                            Label {text: tel; x: 270; width: 80; height: 31}
+                            Label {text: addr; x: 360; width: 80; height: 31}
 
-//                            }
-//                        }
-//                    }
+                            Button {
+                                id: delbtn
+                                text: "Del"
+                                x: 450
+                                width: 40
+                                height: 20
 
-                    Rectangle {
-                        height: 30
-                        Label {text: name; x: 0; width: 80; height: 30}
-                        Label {text: sex; x: 90; width: 50; height: 30}
-                        Label {text: age; x: 180; width: 20; height: 30}
-                        Label {text: tel; x: 270; width: 80; height: 30}
-                        Label {text: addr; x: 360; width: 80; height: 30}
-
-
-                        Button {
-
-                            id: delbtn
-                            text: "Del"
-                            x: 450
-                            width: 40
-                            height: 20
-                            style: ButtonStyle {
-                                background: Rectangle {
-                                    color: "lightblue"
-                                    radius: 4
-                                    border.width: delbtn.pressed? 1:0
-                                    border.color: "red"
+                                style: ButtonStyle {
+                                    background: Rectangle {
+                                        color: "lightgreen"
+                                        radius: 4
+                                        border.width: delbtn.pressed? 1:0
+                                        border.color: "red"
+                                    }
                                 }
-                            }
 
-                            onClicked:  {
-                                //listview.model.
+                                onClicked:  {
+                                    //listview.model.
 
+                                }
                             }
                         }
                     }
                 }
             }
+
+
         }
 
         GroupBox {
             id: detials
             title: "Details"
-            //Layout.minimumHeight: 100
             Layout.fillWidth:true
 
             GridLayout {
