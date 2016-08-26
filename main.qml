@@ -1,6 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.0
+import QtQuick.Controls.Styles 1.2
 
 ApplicationWindow {
     visible: true
@@ -9,57 +10,6 @@ ApplicationWindow {
     height: 400
 
     title: qsTr("Model View")
-    ListModel {
-        id: listmodel
-
-        ListElement {
-            name: "zhangsan"
-            sex: "male"
-            age: 15
-            tel: "5556464"
-            addr: "china"
-        }
-
-        ListElement {
-            name: "zhangsan"
-            sex: "male"
-            age: 15
-            tel: "5556464"
-            addr: "china"
-        }
-
-        ListElement {
-            name: "zhangsan"
-            sex: "male"
-            age: 15
-            tel: "5556464"
-            addr: "china"
-        }
-
-        ListElement {
-            name: "zhangsan"
-            sex: "male"
-            age: 15
-            tel: "5556464"
-            addr: "china"
-        }
-
-        ListElement {
-            name: "zhangsan"
-            sex: "male"
-            age: 15
-            tel: "5556464"
-            addr: "china"
-        }
-
-        ListElement {
-            name: "zhangsan"
-            sex: "male"
-            age: 15
-            tel: "5556464"
-            addr: "china"
-        }
-    }
 
     ColumnLayout {
         id: mainLayout
@@ -75,52 +25,62 @@ ApplicationWindow {
             border.width: 2
             border.color: "red"
             width: parent.width
-            height: 200
+            height: listview.implicitHeight + 10
+            Layout.fillHeight: true
 
             ListView {
                 id: listview
                 spacing: 4
                 anchors.fill: parent
+                anchors.margins: 5
+                implicitHeight: 250
 
+                header: Component {
+                    id: listviewheader
 
-//                header: Component {
-//                    id: listviewheader
+                    Row {
+                        width: 30
+                        spacing: 4
+                        Text { text: "Name";}
 
-//                    Row {
-//                        width: 30
+                        Text { text: "Sex";}
 
-//                        Text { text: "Name"}
-//                        Rectangle{width: 1;color: "yellow"}
-//                        Text { text: "Name"}
-//                        Rectangle{width: 1;color: "yellow"}
-//                        Text { text: "Name"}
-//                        Rectangle{width: 1;color: "yellow"}
-//                        Text { text: "Name"}
-//                        Rectangle{width: 1;color: "yellow"}
-//                        Text { text: "Name"}
-//                    }
-//                }
+                        Text { text: "Age"; }
 
-                model: listmodel
+                        Text { text: "Tel"; }
+
+                        Text { text: "Addr"; }
+                    }
+                }
+
+                model: MyModel
 
                 delegate: Component {
                     Row{
                         width: 30
-                        Label {text: name}
-                        Label {text: sex}
-                        Label {text: age}
-                        Label {text: tel}
-                        Label {text: addr}
+                        spacing: 4
+                        Label {text: name;}
+                        Label {text: sex;}
+                        Label {text: age;}
+                        Label {text: tel;}
+                        Label {text: addr;}
 
                         Button {
 
                             id: delbtn
                             text: "Del"
-                        }
+                            style: ButtonStyle {
+                                background: Rectangle {
+                                    color: "lightblue"
+                                    radius: 4
+                                    border.width: delbtn.pressed? 1:0
+                                    border.color: "red"
+                                }
+                            }
 
-                        Button {
-                            id: addbtn
-                            text: "Add"
+                            onClicked:  {
+
+                            }
                         }
                     }
                 }
@@ -139,11 +99,11 @@ ApplicationWindow {
                 rows: 5
                 flow: GridLayout.TopToBottom
 
-                Label {text: "Name"}
-                Label {text: "Sex"}
-                Label {text: "Age"}
-                Label {text: "Tel"}
-                Label {text: "Addr"}
+                Label {id:nameLabel; text: "Name"}
+                Label {id: sexLabel; text: "Sex"}
+                Label {id: ageLabel; text: "Age"}
+                Label {id: telLabel; text: "Tel"}
+                Label {id: addrLabel; text: "Addr"}
 
                 TextField { Layout.fillWidth: true; }
                 TextField { Layout.fillWidth: true;  }
