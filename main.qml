@@ -86,7 +86,7 @@ ApplicationWindow {
 
                                 onClicked:  {
                                     mymodel1.removeRow(index);
-                                    listview.update();
+                                    //listview.update();
                                 }
                             }
                         }
