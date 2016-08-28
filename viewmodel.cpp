@@ -7,18 +7,21 @@ ListModel::ListModel(QObject *parent)
 
 bool ListModel::removeRow(int row, const QModelIndex &parent)
 {
+    beginRemoveRows(QModelIndex(), row, row);
     Q_UNUSED(parent);
     qDebug() << "delete an item";
     list.removeAt(row);
-    foreach (Person var, list) {
-        qDebug() << var.name << var.sex << var.age <<var.tel << var.addr <<"\n";
-    }
+//    foreach (Person var, list) {
+//        qDebug() << var.name << var.sex << var.age <<var.tel << var.addr <<"\n";
+//    }
+    endRemoveRows();
     return true;
 }
 
 bool ListModel::insertRow(int row, const QString name, const QString sex, const int age,
                           const QString tel, const QString addr)
 {
+    beginInsertRows(QModelIndex(), row, row);
     Person person;
     person.name = name;
     person.sex = sex;
@@ -26,10 +29,12 @@ bool ListModel::insertRow(int row, const QString name, const QString sex, const 
     person.tel = tel;
     person.addr = addr;
     list.insert(row,person);
+    endInsertRows();
 
-    foreach (Person var, list) {
-        qDebug() << var.name << var.sex << var.age <<var.tel << var.addr <<"\n";
-    }
+//    foreach (Person var, list) {
+//        qDebug() << var.name << var.sex << var.age <<var.tel << var.addr <<"\n";
+//    }
+    return true;
 }
 
 int ListModel::rowCount(const QModelIndex &parent) const
@@ -74,8 +79,4 @@ void ListModel::addPerson(const Person &person)
     endInsertColumns();
 }
 
-//QList<Person> ListModel::model()const
-//{
 
-//    return list;
-//}

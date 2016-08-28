@@ -37,7 +37,7 @@ public:
     Q_INVOKABLE bool insertRow(int row, const QString name, const QString sex = "", const int age = 0,
                                const QString tel = "", const QString addr = "");
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role) const ;
 
 protected:
     QHash<int,QByteArray> roleNames()const;
