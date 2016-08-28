@@ -52,14 +52,12 @@ ApplicationWindow {
                     anchors.fill: parent
                     anchors.margins: 5                   
 
-                    snapMode:  ListView.SnapToItem
-                    highlight: highlight
+                    snapMode: ListView.SnapToItem
+                    //highlight: highlight
                     focus: true
                     model: mymodel1
 
-
-
-                    delegate: Item {
+                    delegate: Component {
                         id: item
 
                         Rectangle {
@@ -87,7 +85,8 @@ ApplicationWindow {
                                 }
 
                                 onClicked:  {
-
+                                    mymodel1.removeRow(index);
+                                    listview.update();
                                 }
                             }
                         }
@@ -107,17 +106,17 @@ ApplicationWindow {
                 rows: 5
                 flow: GridLayout.TopToBottom
 
-                Label {id:nameLabel; text: "Name"}
+                Label {id: nameLabel; text: "Name"}
                 Label {id: sexLabel; text: "Sex"}
                 Label {id: ageLabel; text: "Age"}
                 Label {id: telLabel; text: "Tel"}
                 Label {id: addrLabel; text: "Addr"}
 
-                TextField { Layout.fillWidth: true; }
-                TextField { Layout.fillWidth: true;  }
-                TextField { Layout.fillWidth: true; }
-                TextField { Layout.fillWidth: true; }
-                TextField { Layout.fillWidth: true; }
+                TextField { id: nameText; Layout.fillWidth: true; }
+                TextField { id: sexText; Layout.fillWidth: true;  }
+                TextField { id: ageText; Layout.fillWidth: true; }
+                TextField { id: telText; Layout.fillWidth: true; }
+                TextField { id: addrText; Layout.fillWidth: true; }
 
                 Button {
                     id: addbtn
@@ -132,7 +131,12 @@ ApplicationWindow {
                     }
 
                     onClicked: {
-                        //mymodel1.
+                        if(!nameText.text)
+                            console.log("nameText is empty");
+                        else {
+                           mymodel1.insertRow(mymodel1.rowCount(), nameText.text ,sexText.text,
+                                              parseInt(ageText.text), telText.text, addrText.text);
+                        }
                     }
                 }
             }

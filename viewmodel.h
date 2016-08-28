@@ -29,12 +29,13 @@ public:
         QString addr;
     };
 
-    void addPerson(const Person &person);
+    Q_INVOKABLE void addPerson(const Person &person);
     //QList<Person> model()const;
 
 
-    Q_INVOKABLE bool removeRow(int row, const QModelIndex &parent);
-    Q_INVOKABLE bool insertRow(int row, const QModelIndex &parent);
+    Q_INVOKABLE bool removeRow(int row, const QModelIndex &parent = QModelIndex());
+    Q_INVOKABLE bool insertRow(int row, const QString name, const QString sex = "", const int age = 0,
+                               const QString tel = "", const QString addr = "");
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
 

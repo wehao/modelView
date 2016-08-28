@@ -1,4 +1,5 @@
 #include "viewmodel.h"
+#include <QDebug>
 
 ListModel::ListModel(QObject *parent)
     :QAbstractListModel(parent)
@@ -6,12 +7,29 @@ ListModel::ListModel(QObject *parent)
 
 bool ListModel::removeRow(int row, const QModelIndex &parent)
 {
+    Q_UNUSED(parent);
+    qDebug() << "delete an item";
+    list.removeAt(row);
+    foreach (Person var, list) {
+        qDebug() << var.name << var.sex << var.age <<var.tel << var.addr <<"\n";
+    }
     return true;
 }
 
-bool ListModel::insertRow(int row, const QModelIndex &parent)
+bool ListModel::insertRow(int row, const QString name, const QString sex, const int age,
+                          const QString tel, const QString addr)
 {
-    return true;
+    Person person;
+    person.name = name;
+    person.sex = sex;
+    person.age = age;
+    person.tel = tel;
+    person.addr = addr;
+    list.insert(row,person);
+
+    foreach (Person var, list) {
+        qDebug() << var.name << var.sex << var.age <<var.tel << var.addr <<"\n";
+    }
 }
 
 int ListModel::rowCount(const QModelIndex &parent) const
