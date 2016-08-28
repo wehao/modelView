@@ -12,9 +12,10 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     qmlRegisterType<Person>("com.person", 1, 0, "Person");
-    qmlRegisterType<ListModel>("com.listmodel", 1, 0, "ListModel");
 
     QList<QObject*>  list;
+    ListModel listmodel;
+    listmodel.addPerson({"zhangsan", "male", 42, "33333", "China"});
 
     list.append(new Person("zhangsan", "male", 22, "33333", "China"));
     list.append(new Person("lisi", "male", 22, "33333", "China"));
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     QQmlContext *qctx = engine.rootContext();
     qctx->setContextProperty("mymodel", QVariant::fromValue(list));
+    qctx->setContextProperty("mymodel1",&listmodel);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

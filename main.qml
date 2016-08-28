@@ -2,7 +2,6 @@ import QtQuick 2.6
 import QtQuick.Controls 1.5
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.2
-import com.listmodel 1.0
 
 ApplicationWindow {
     visible: true
@@ -51,13 +50,17 @@ ApplicationWindow {
                     id: listview
                     spacing: 4
                     anchors.fill: parent
-                    anchors.margins: 5
-                    //implicitHeight: 200
+                    anchors.margins: 5                   
 
                     snapMode:  ListView.SnapToItem
-                    model: mymodel
+                    highlight: highlight
+                    focus: true
+                    model: mymodel1
 
-                    delegate: Component {
+
+
+                    delegate: Item {
+                        id: item
 
                         Rectangle {
                             height: 31
@@ -84,7 +87,6 @@ ApplicationWindow {
                                 }
 
                                 onClicked:  {
-                                    //listview.model.
 
                                 }
                             }
@@ -92,8 +94,6 @@ ApplicationWindow {
                     }
                 }
             }
-
-
         }
 
         GroupBox {
@@ -118,6 +118,23 @@ ApplicationWindow {
                 TextField { Layout.fillWidth: true; }
                 TextField { Layout.fillWidth: true; }
                 TextField { Layout.fillWidth: true; }
+
+                Button {
+                    id: addbtn
+                    text: "Add"
+                    style: ButtonStyle {
+                        background: Rectangle {
+                            color: "lightgreen"
+                            radius: 4
+                            border.width: addbtn.pressed? 1:0
+                            border.color: "red"
+                        }
+                    }
+
+                    onClicked: {
+                        //mymodel1.
+                    }
+                }
             }
         }
     }
